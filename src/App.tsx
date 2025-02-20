@@ -9,8 +9,9 @@ const App = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [speed, setSpeed] = useState(200); // Milliseconds between moves
+  const snakeColor = 'blue';
 
-  const gridSize = 20; // Grid size
+  const gridSaze = 20; // Grid size
   const tileSize = 30; // Size of each grid square
 
   // This useRef stores the interval ID for the game loop
@@ -26,8 +27,8 @@ const App = () => {
     if (
       newHead[0] < 0 ||
       newHead[1] < 0 ||
-      newHead[0] >= gridSize ||
-      newHead[1] >= gridSize ||
+      newHead[0] >= gridSaze ||
+      newHead[1] >= gridSaze ||
       newSnake.some(([x, y]) => x === newHead[0] && y === newHead[1])
     ) {
       setIsGameOver(true);
@@ -39,7 +40,7 @@ const App = () => {
 
     // Check if the snake eats the food
     if (newHead[0] === food[0] && newHead[1] === food[1]) {
-      setFood([Math.floor(Math.random() * gridSize), Math.floor(Math.random() * gridSize)]);
+      setFood([Math.floor(Math.random() * gridSaze), Math.floor(Math.random() * gridSaze)]);
       setScore((prev) => prev + 10);
 
       // Increase snake speed slightly with each food eaten
@@ -99,7 +100,7 @@ const App = () => {
 
       // Draw the snake
       snake.forEach(([x, y]) => {
-        context.fillStyle = 'limegreen';
+        context.fillStyle = snakeColor;
         context.strokeStyle = 'darkgreen';
         context.lineWidth = 2;
         context.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
@@ -144,8 +145,8 @@ const App = () => {
       <p>Score: {score}</p>
       <canvas
         ref={canvasRef}
-        width={gridSize * tileSize}
-        height={gridSize * tileSize}
+        width={gridSaze * tileSize}
+        height={gridSaze * tileSize}
         style={{ border: '2px solid #444', background: '#222', margin: '0 auto' }}
       ></canvas>
     </div>
